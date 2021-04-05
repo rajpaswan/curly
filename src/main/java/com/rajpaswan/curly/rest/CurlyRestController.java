@@ -1,7 +1,7 @@
 package com.rajpaswan.curly.rest;
 
 import com.rajpaswan.curly.domain.ShortenUrlRequest;
-import com.rajpaswan.curly.service.UrlShortnerService;
+import com.rajpaswan.curly.service.LinkShortenerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,17 +20,18 @@ import java.util.logging.Logger;
 public class CurlyRestController {
 
 	private final static Logger LOGGER = Logger.getLogger(CurlyRestController.class.getName());
-	private final UrlShortnerService urlShortnerService;
+	private final LinkShortenerService linkShortenerService;
 
 	@Autowired
-	public CurlyRestController(UrlShortnerService urlShortnerService) {
-		this.urlShortnerService = urlShortnerService;
+	public CurlyRestController(LinkShortenerService linkShortenerService) {
+		this.linkShortenerService = linkShortenerService;
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<String> makeShortUrl(@RequestBody ShortenUrlRequest request, HttpServletRequest servletRequest) {
+	@RequestMapping(method = RequestMethod.POST, path = "/shorten")
+	public ResponseEntity<String> makeShortUrl(@RequestBody ShortenUrlRequest request,
+											   HttpServletRequest servletRequest) {
 		LOGGER.info("request = " + request);
-		String shortUrl = urlShortnerService.makeShortUrl(request.getTargetUrl());
+		String shortUrl = linkShortenerService.makeShortUrl(request.getTargetUrl());
 		String fullUrl = servletRequest.getRequestURL() + shortUrl;
 		return ResponseEntity.status(HttpStatus.CREATED).body(fullUrl);
 	}
@@ -39,7 +40,7 @@ public class CurlyRestController {
 	public ResponseEntity<String> fetchTargetUrl(@PathVariable("short_url") String shortUrl) {
 		LOGGER.info("short_url = " + shortUrl);
 
-		String targetUrl = urlShortnerService.fetchTargetUrl(shortUrl);
+		String targetUrl = linkShortenerService.fetchTargetUrl(shortUrl);
 		if (targetUrl == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found!");
 		}

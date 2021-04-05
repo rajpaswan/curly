@@ -10,13 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.logging.Logger;
 
 @Service
-public class UrlShortnerService {
+public class LinkShortenerService {
 
-	private final static Logger LOGGER = Logger.getLogger(UrlShortnerService.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(LinkShortenerService.class.getName());
 	private final UrlDetailRepository urlRepo;
 
 	@Autowired
-	public UrlShortnerService(UrlDetailRepository urlRepo) {
+	public LinkShortenerService(UrlDetailRepository urlRepo) {
 		this.urlRepo = urlRepo;
 	}
 
