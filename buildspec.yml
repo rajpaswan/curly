@@ -1,0 +1,15 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo "At pr-build stage..."
+  build:
+    commands:
+      - echo "At build stage..."
+      - mvn clean install
+  post_build:
+    commands:
+      - echo "At post-build stage..."
+artifacts:
+  files:
+    - target/*.war
