@@ -12,4 +12,4 @@ phases:
       - echo "At post-build stage..."
 artifacts:
   files:
-    - target/*.war
+    - target/**/*
