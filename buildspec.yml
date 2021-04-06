@@ -2,7 +2,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo "At pr-build stage..."
+      - echo "At pre-build stage..."
   build:
     commands:
       - echo "At build stage..."
