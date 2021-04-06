@@ -6,7 +6,7 @@ phases:
   build:
     commands:
       - echo "At build stage..."
-      - mvn -DskipTests clean prepare-package war:exploded
+      - mvn -DskipTests clean install
   post_build:
     commands:
       - echo "At post-build stage..."
