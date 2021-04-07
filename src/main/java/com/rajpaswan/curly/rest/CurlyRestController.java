@@ -27,7 +27,7 @@ public class CurlyRestController {
 		this.linkShortenerService = linkShortenerService;
 	}
 
-	@RequestMapping(method = RequestMethod.POST, path = "/")
+	@RequestMapping(method = RequestMethod.POST, path = "/shorten")
 	public ResponseEntity<String> makeShortUrl(@RequestBody ShortenUrlRequest request,
 											   HttpServletRequest servletRequest) {
 		LOGGER.info("request = " + request);
@@ -36,7 +36,7 @@ public class CurlyRestController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(fullUrl);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/{short_url}")
+	@RequestMapping(method = RequestMethod.GET, value = "/d/{short_url}")
 	public ResponseEntity<String> fetchTargetUrl(@PathVariable("short_url") String shortUrl) {
 		LOGGER.info("short_url = " + shortUrl);
 
